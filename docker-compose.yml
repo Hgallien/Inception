@@ -1,0 +1,30 @@
+version: "3.2"
+
+services:
+  nginx:
+    container_name: nginx
+    tty: true
+    stdin_open: true
+    build:
+      context: ./Nginx
+      dockerfile: Dockerfile
+  wp:
+    volumes:
+      - data-volume:/volume_wp
+    container_name: wp
+    tty: true
+    stdin_open: true
+    build:
+      context: ./WP
+      dockerfile: Dockerfile
+  db:
+    container_name: db
+    volumes:
+      - data-volume:/volume_db
+    tty: true
+    stdin_open: true
+    build:
+      context: ./Mysql
+      dockerfile: Dockerfile
+volumes:
+  data-volume: 
